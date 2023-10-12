@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Ex1 {
     public static void main(String[] args) {
 
-        String correctPassword = "carrot";
+        String correctPassword = "Samira";
         String inputPassword;
 
         Scanner scan = new Scanner(System.in);
