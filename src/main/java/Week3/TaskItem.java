@@ -1,0 +1,57 @@
+package Week3;
+
+public class TaskItem {
+    private int taskId;
+    private String taskDescription;
+    private Status taskStatus;
+
+    public TaskItem(int taskId, String taskDescription, Status taskStatus){
+        this.taskId = taskId;
+        this.taskDescription= taskDescription;
+        this.taskStatus = taskStatus;
+    }
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
+
+    public Status getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(Status taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    // ****** MAIN ******
+
+    public static void main(String[] args) {
+        TaskItem taskItem = new TaskItem(1, "Palindrome", Status.TO_DO);
+        System.out.println(taskItem.getTaskId());
+        System.out.println(taskItem.getTaskDescription());
+        System.out.println(taskItem.getTaskStatus());
+
+        taskItem.setTaskId(2);
+        taskItem.setTaskDescription("Sum of even numbers");
+        taskItem.setTaskStatus(Status.IN_PROGRESS);
+
+        System.out.println("\nAFTER MODIFICATION:\n");
+
+        System.out.println(taskItem.getTaskId());
+        System.out.println(taskItem.getTaskDescription());
+        System.out.println(taskItem.getTaskStatus());
+
+    }
+}
