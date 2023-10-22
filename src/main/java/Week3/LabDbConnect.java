@@ -78,15 +78,4 @@ public class LabDbConnect {
 
     //******** MAIN **********
 
-    public static void main(String[] args) {
-        LabDbConnect dbConnect = new LabDbConnect();
-        try {
-            dbConnect.getAll();
-            dbConnect.getByStatus(Status.IN_PROGRESS);
-            dbConnect.idGreaterThanTwo();
-            dbConnect.printTaskDescription();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
