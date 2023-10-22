@@ -14,6 +14,7 @@ public class LectureDataStructures {
         );
     }
     public List<LectureUser> getAll() {
+
         return this.users;
     }
     public Optional<LectureUser> getByName(String name) {
@@ -63,12 +64,41 @@ public class LectureDataStructures {
 
     public static void main(String[] args) {
         LectureDataStructures ds = new LectureDataStructures();
-        System.out.println(ds.getAll());
-        System.out.println(ds.getByName("Adnan"));
-        System.out.println(ds.findAgeGreaterThan(29));
+
+        System.out.println("Get all users:");
+        List<LectureUser> allUsers = ds.getAll();
+        for (LectureUser u : allUsers){
+            System.out.println(u.getName() + "  " + u.getGender() + "  " + u.getAge());
+        }
+
+        System.out.println("\nGet by name:");
+        Optional<LectureUser> optioanlUser = ds.getByName("Adnan");
+        if(optioanlUser.isPresent()) {
+            LectureUser user = optioanlUser.get();
+            System.out.println(user.getName());
+        } else {
+            System.out.println("User not found");
+        }
+
+        System.out.println("\nFind age greater than:");
+        List<LectureUser> users = ds.findAgeGreaterThan(100);
+        for (LectureUser user : users){
+            System.out.println(user.getName() + "  " + user.getAge());
+        }
+
+        System.out.println("\nMultiply age:");
         System.out.println(ds.multiplyAge());
+
+        System.out.println("\nMultiply age and print:");
         ds.multiplyAgeAndPrint();
-        System.out.println(ds.multiplyAgeRetuenUserAndPrint());
+
+        System.out.println("\nMultiply age return user and print:");
+        users  = ds.multiplyAgeRetuenUserAndPrint();
+        for (LectureUser user : users ){
+            System.out.println(user.getName() + "  " + user.getAge());
+        }
+
+        System.out.println("\nGet by gender:");
         ds.getByGender(LectureGender.MALE);
     }
 }

@@ -17,11 +17,9 @@ public class LabDataStructures {
         );
     }
     public List<TaskItem> getAll() {
-        System.out.println("Get all:");
         return this.tasks;
     }
     public void getByStatus (Status status) {
-        System.out.println("\nGet by status:");
         List<TaskItem> filteredTasks = tasks.stream()
                 .filter(task -> task.getTaskStatus().equals(status))
                 .collect(Collectors.toList());
@@ -30,14 +28,12 @@ public class LabDataStructures {
         }
     }
     public List<TaskItem> idGreaterThanTwo() {
-        System.out.println("\nTask ID greater than or equal to 2:");
         return tasks
                 .stream()
                 .filter(task -> task.getTaskId() >= 2)
                 .collect(Collectors.toList());
     }
     public void printTaskDescription() {
-        System.out.println("\nPrint task description:");
         tasks
                 .stream()
                 .map(task -> task.getTaskDescription())
@@ -45,16 +41,28 @@ public class LabDataStructures {
                     System.out.println(y);;
                 });
     }
+    // ****** MAIN *******
 
     public static void main(String[] args) {
         LabDataStructures labDataStructures = new LabDataStructures();
-        System.out.println(labDataStructures.getAll());
+        List<TaskItem> tasks;
+
+        System.out.println("Get all:");
+        tasks = labDataStructures.getAll();
+        for (TaskItem task : tasks){
+            System.out.println(task.getTaskId() + "  " + task.getTaskDescription() + "  " + task.getTaskStatus());
+        }
+
+        System.out.println("\nGet by status:");
         labDataStructures.getByStatus(Status.CANCELLED);
 
-        List<TaskItem> filteredTasks = labDataStructures.idGreaterThanTwo();
-        for (TaskItem taskItem : filteredTasks){
-            System.out.println(taskItem);
+        System.out.println("\nId greater than two:");
+        tasks = labDataStructures.idGreaterThanTwo();
+        for (TaskItem task : tasks){
+            System.out.println(task.getTaskId() + "  " + task.getTaskDescription() + "  " + task.getTaskStatus());
         }
+
+        System.out.println("\nPrint task description:");
         labDataStructures.printTaskDescription();
     }
 }
