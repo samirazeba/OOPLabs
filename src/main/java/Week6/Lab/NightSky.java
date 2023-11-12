@@ -6,18 +6,21 @@ class NightSky {
     private double density;
     private int width;
     private int height;
-    private int starsInTheLastPrint=0;
+    private int starsInLastPrint = 0;
 
+    //First Constructor:
     public NightSky(double density) {
         this.density = density;
         this.width = 20;
         this.height = 10;
     }
+    //Secon Constructor:
     public NightSky(int width, int height) {
         this.width = width;
         this.height = height;
         this.density = 0.1;
     }
+    //Third Constructor
     public NightSky(double density, int width, int height) {
         this.density = density;
         this.width = width;
@@ -27,49 +30,41 @@ class NightSky {
     public void printLine() {
         Random random = new Random();
         for (int i = 0; i < this.width; i++){
-            double randomValue = random.nextDouble();
-            if (randomValue < this.density) {
+            if(random.nextDouble() <= this.density) {
                 System.out.print("*");
-                starsInTheLastPrint++;
+                starsInLastPrint++; //counts the number of stars;
             } else {
                 System.out.print(" ");
             }
         }
+        System.out.println();
     }
+
     public void print() {
-        for (int i = 0; i < width; i++){
+        for (int i = 0; i < this.height; i++) {
             printLine();
-            System.out.println();
         }
     }
     public int starsInLastPrint() {
-        int sitlp = starsInTheLastPrint;
-        starsInTheLastPrint=0;
-        return sitlp;
-
+        int numberOfStars = starsInLastPrint;
+        starsInLastPrint = 0;
+        return numberOfStars;
     }
 }
-class NightSkyMain {
+class MainNightSky {
     public static void main(String[] args) {
-        /*NightSky nightSky = new NightSky(0.1, 40, 10);
-        nightSky.printLine();
-        System.out.println("Number of start: "+ nightSky.starsInLastPrint());
+        NightSky NightSky = new NightSky(0.1, 40, 10);
+        System.out.println("PART 1 (Print line of stars):");
+        NightSky.printLine();
 
-        NightSky nightSky1 = new NightSky(8,4);
-        nightSky1.print();
-        System.out.println("Number of stars: " + nightSky1.starsInLastPrint());
-        System.out.println();
+        System.out.println("\nPART 2 (Print a night sky):");
+        NightSky = new NightSky(8, 4);
+        NightSky.print();
 
-        nightSky1.print();
-        System.out.println("Number of stars: " + nightSky1.starsInLastPrint());*/
-
-        NightSky nightsky = new NightSky(0.125, 5, 7);
-        nightsky.print();
-        System.out.println();
-
-        System.out.println("Number of stars: "+ nightsky.starsInLastPrint());
-        nightsky.print();
-        System.out.println("Number of stars: "+ nightsky.starsInLastPrint());
+        System.out.println("\nPART 3:");
+        System.out.println("Number of stars in the previous night sky: " + NightSky.starsInLastPrint());
+        System.out.println("Final example:");
+        NightSky.print();
+        System.out.println("Number of stars: " + NightSky.starsInLastPrint());
     }
 }
-
