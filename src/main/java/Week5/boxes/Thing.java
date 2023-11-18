@@ -46,7 +46,7 @@ class Thing {
         if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
-        Thing thing = (Thing) o;
+        Thing thing = (Thing) o; //
         return Objects.equals(name, thing.name);
     }
 }
