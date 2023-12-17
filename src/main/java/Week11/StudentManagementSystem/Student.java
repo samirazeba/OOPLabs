@@ -41,11 +41,7 @@ class Student {
 
     @Override
     public String toString() {
-        return "ID: " + this.id +
-                "\nName: " + this.name +
-                "\nUniversity: " + this.university +
-                "\nDepartment: " + this.department +
-                "\nGPA: " + this.gpa;
+        return "Name: " + this.name;
     }
 }
 class EmptyStudentListException extends RuntimeException {
@@ -70,8 +66,8 @@ class StudentSystem {
         for (String line : lines) {
             String[] studentParts = line.split(",");
             Student s = new Student(studentParts[0] == "" ? 0 : Integer.parseInt(studentParts[0]),
-                                    studentParts[1], studentParts[2], studentParts[3],
-                                    studentParts[4] == "" ? 0 : Double.parseDouble(studentParts[4]));
+                    studentParts[1], studentParts[2], studentParts[3],
+                    studentParts[4] == "" ? 0 : Double.parseDouble(studentParts[4]));
             students.add(s);
         }
         bufferedReader.close();
@@ -85,15 +81,18 @@ class StudentSystem {
         }
     }
 
-    public Optional<Student> getStudentById (int id) {
+    public List<Student> getAllStudents() {
+        return new ArrayList<>(students);
+    }
+    public Optional<Student> getStudentById (int id) throws StudentNotFountException {
         for (Student student : students) {
             if (student.id() == id) {
                 return Optional.of(student);
             }
-        } return Optional.empty();
+        } throw new StudentNotFountException("Student couldn't be found");
     }
 
-    public Student getHighestGPAStudent () {
+    public Student getHighestGPAStudent () throws EmptyStudentListException {
         if (students.isEmpty()) {
             throw new EmptyStudentListException("List of students is empty.");
         }
@@ -105,7 +104,7 @@ class StudentSystem {
         } return highestGPA;
     }
 
-    public Student getLongestNameStudent () {
+    public Student getLongestNameStudent () throws EmptyStudentListException {
         if (students.isEmpty()) {
             throw new EmptyStudentListException("List of empty students.");
         }
@@ -120,8 +119,9 @@ class StudentSystem {
 }
 class RunStudentSystem {
     public static void main(String[] args) {
-        StudentSystem studentSystem = new StudentSystem("students.csv");
+        StudentSystem studentSystem = new StudentSystem("C:\\Users\\PC\\Downloads\\students.csv");
         try {
+
             int id = 10;
             System.out.println("Student with id " + id);
             Optional<Student> studentById = studentSystem.getStudentById(id);
@@ -130,10 +130,17 @@ class RunStudentSystem {
             } else {
                 throw new StudentNotFountException("Student with ID " + id + " not found.");
             }
+
+            //Highest GPA
+            System.out.println("Student with the highest GPA: " + studentSystem.getHighestGPAStudent().name());
+
+            //Longest name
+            System.out.println("Student with the longest name: " + studentSystem.getLongestNameStudent().name());
+
+
         } catch (StudentNotFountException e) {
             System.out.println(e.getMessage());
         }
 
     }
 }
-
